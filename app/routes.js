@@ -426,6 +426,659 @@ router.use(
   require("./views/apply/v20/alt-formats-5/_routes")
 );
 
+
+///////////////////////////////////////////////////////////////////////////////
+//  V23 ROUTING                                                             //
+///////////////////////////////////////////////////////////////////////////////
+
+
+////// Alternative formats v23 //////
+// This moves routing for 'wt-alt-formats-3' to alt-formats directory in v23
+router.use(
+  "/apply/v23/wt-alt-formats-3/",
+  require("./views/apply/v23/wt-alt-formats-3/_routes")
+);
+
+// Routes you to state-pension or may-not-be-eligible at the first radio button screen
+router.route('/apply/v23/disability-or-health-condition')
+.post((req, res, next) => {
+  let redirectUrl;
+  switch (req.body['disability']) {
+    case 'yes~/apply/v23/state-pension':
+      redirectUrl = '/apply/v23/state-pension';
+      break;
+    case 'no~/apply/v23/may-not-be-eligible':
+      redirectUrl = '/apply/v23/may-not-be-eligible';
+      break;
+    default:
+      redirectUrl = req.path;
+      break;
+  }
+  res.redirect(redirectUrl);
+});
+
+// Routes
+router.route('/apply/v23/state-pension')
+.post((req, res, next) => {
+  let redirectUrl;
+  switch (req.body['state-pension']) {
+    case 'yes~/apply/v23/national-insurance':
+      redirectUrl = '/apply/v23/national-insurance';
+      break;
+    case 'no~/apply/v23/may-not-be-eligible-state-pension':
+      redirectUrl = '/apply/v23/may-not-be-eligible-state-pension';
+      break;
+    default:
+      redirectUrl = req.path;
+      break;
+  }
+  res.redirect(redirectUrl);
+});
+
+// Routes
+router.route('/apply/v23/national-insurance')
+.post((req, res, next) => {
+  let redirectUrl;
+  switch (req.body['severe-disability']) {
+    case 'yes~/apply/v23/statutory-pay':
+      redirectUrl = '/apply/v23/statutory-pay';
+      break;
+    case 'no~/apply/v23/may-not-be-eligible-national-insurance':
+      redirectUrl = '/apply/v23/may-not-be-eligible-national-insurance';
+      break;
+    case 'notsure~/apply/v23/statutory-pay':
+      redirectUrl = '/apply/v23/statutory-pay';
+      break;
+    default:
+      redirectUrl = req.path;
+      break;
+  }
+  res.redirect(redirectUrl);
+});
+
+// Routes
+router.route('/apply/v23/statutory-pay')
+.post((req, res, next) => {
+  let redirectUrl;
+  switch (req.body['statutory-pay']) {
+    case 'Yes':
+      redirectUrl = '/apply/v23/statutory-pay-date';
+      break;
+    case 'No':
+      redirectUrl = '/apply/v23/why-no-ssp';
+      break;
+    default:
+      redirectUrl = req.path;
+      break;
+  }
+  res.redirect(redirectUrl);
+});
+
+// Routes
+router.route('/apply/v23/statutory-pay-date')
+.post((req, res, next) => {
+  let redirectUrl;
+  switch (req.body['statutory-pay-end']) {
+    case 'yes~/apply/v23/may-be-eligible':
+      redirectUrl = '/apply/v23/may-be-eligible';
+      break;
+    case 'no~/apply/v23/may-not-be-eligible-statutory-pay':
+      redirectUrl = '/apply/v23/may-not-be-eligible-statutory-pay';
+      break;
+    default:
+      redirectUrl = req.path;
+      break;
+  }
+  res.redirect(redirectUrl);
+});
+
+// Routes
+router.route('/apply/v23/address')
+.post((req, res, next) => {
+  let redirectUrl;
+  switch (req.body['send-letters']) {
+    case 'yes~/apply/v23/telephone':
+      redirectUrl = '/apply/v23/telephone';
+      break;
+    case 'no~/apply/v23/correspondence-address':
+      redirectUrl = '/apply/v23/correspondence-address';
+      break;
+    default:
+      redirectUrl = req.path;
+      break;
+  }
+  res.redirect(redirectUrl);
+});
+
+// if postcode is in Wales, show the contact preference questions - v23
+router.post('/welsh-or-not-23', function (req, res) {
+
+  const welsh = req.session.data['address-postcode']
+
+  if (welsh == 'wales' ) {
+    res.redirect('/apply/v23/language-preference-writing')
+  } else {
+    res.redirect('/apply/v23/telephone')
+  }
+})
+
+// Routes
+router.route('/apply/v23/telephone')
+.post((req, res, next) => {
+  let redirectUrl;
+  switch (req.body['mobile-phone']) {
+    case 'yes~/apply/v23/email':
+      redirectUrl = '/apply/v23/email';
+      break;
+    case 'no~/apply/v23/landline':
+      redirectUrl = '/apply/v23/landline';
+      break;
+    default:
+      redirectUrl = req.path;
+      break;
+  }
+  res.redirect(redirectUrl);
+});
+
+// Routes
+router.route('/apply/v23/condition-another')
+.post((req, res, next) => {
+  let redirectUrl;
+  switch (req.body['condition-another']) {
+    case 'yes':
+      redirectUrl = '/apply/v23/condition';
+      break;
+    case 'no':
+      redirectUrl = '/apply/v23/gpsurgery';
+      break;
+    default:
+      redirectUrl = req.path;
+      break;
+  }
+  res.redirect(redirectUrl);
+});
+
+// Routes
+router.route('/apply/v23/live-less-than-12-months')
+.post((req, res, next) => {
+  let redirectUrl;
+  switch (req.body['terminal-illness']) {
+    case 'Yes':
+      redirectUrl = '/apply/v23/sr1-report';
+      break;
+    case 'No':
+      redirectUrl = '/apply/v23/hospital';
+      break;
+    default:
+      redirectUrl = req.path;
+      break;
+  }
+  res.redirect(redirectUrl);
+});
+
+// Routes
+router.route('/apply/v23/hospital')
+.post((req, res, next) => {
+  let redirectUrl;
+  switch (req.body['hospital']) {
+    case 'Yes':
+      redirectUrl = '/apply/v23/hospital-details';
+      break;
+    case 'No':
+      redirectUrl = '/apply/v23/pregnant';
+      break;
+    default:
+      redirectUrl = req.path;
+      break;
+  }
+  res.redirect(redirectUrl);
+});
+
+// Routes
+router.route('/apply/v23/pregnant')
+.post((req, res, next) => {
+  let redirectUrl;
+  switch (req.body['pregnancy']) {
+    case 'Yes':
+      redirectUrl = '/apply/v23/pregnant-due-date';
+      break;
+    case 'No':
+      redirectUrl = '/apply/v23/consent';
+      break;
+    default:
+      redirectUrl = req.path;
+      break;
+  }
+  res.redirect(redirectUrl);
+});
+
+// Routes
+router.route('/apply/v23/voluntary-work')
+.post((req, res, next) => {
+  let redirectUrl;
+  switch (req.body['voluntary']) {
+    case 'Yes':
+      redirectUrl = '/apply/v23/voluntary-details';
+      break;
+    case 'No':
+      redirectUrl = '/apply/v23/work';
+      break;
+    default:
+      redirectUrl = req.path;
+      break;
+  }
+  res.redirect(redirectUrl);
+});
+
+// Routes
+router.route('/apply/v23/voluntary-work-another')
+.post((req, res, next) => {
+  let redirectUrl;
+  switch (req.body['voluntary-another']) {
+    case 'Yes':
+      redirectUrl = '/apply/v23/voluntary-details';
+      break;
+    case 'No':
+      redirectUrl = '/apply/v23/work';
+      break;
+    default:
+      redirectUrl = req.path;
+      break;
+  }
+  res.redirect(redirectUrl);
+});
+
+// Routes
+router.route('/apply/v23/work')
+.post((req, res, next) => {
+  let redirectUrl;
+  switch (req.body['work']) {
+    case 'Yes':
+      redirectUrl = '/apply/v23/employment-status';
+      break;
+    case 'No':
+      redirectUrl = '/apply/v23/statutory-pay-recent';
+      break;
+    case 'No':
+      redirectUrl = '/apply/v23/statutory-pay-recent';
+      break;
+    default:
+      redirectUrl = req.path;
+      break;
+  }
+  res.redirect(redirectUrl);
+});
+
+// Routes
+router.route('/apply/v23/worksick')
+.post((req, res, next) => {
+  let redirectUrl;
+  switch (req.body['offSick']) {
+    case 'Yes':
+      redirectUrl = '/apply/v23/last-work';
+      break;
+    case 'No':
+      redirectUrl = '/apply/v23/work-hours';
+      break;
+    default:
+      redirectUrl = req.path;
+      break;
+  }
+  res.redirect(redirectUrl);
+});
+
+// Routes
+router.route('/apply/v23/work-another')
+.post((req, res, next) => {
+  let redirectUrl;
+  switch (req.body['work-another']) {
+    case 'Yes~/apply/v23/employment-status':
+      redirectUrl = '/apply/v23/employment-status';
+      break;
+    case 'No~/apply/v23/statutory-pay-end':
+      redirectUrl = '/apply/v23/statutory-pay-end';
+      break;
+    case 'no~/apply/v23/statutory-pay-recent':
+      redirectUrl = '/apply/v23/statutory-pay-recent';
+      break;
+    default:
+      redirectUrl = req.path;
+      break;
+  }
+  res.redirect(redirectUrl);
+});
+
+// Routes
+router.route('/apply/v23/work-hours')
+.post((req, res, next) => {
+  let redirectUrl;
+  switch (req.body['work-hours']) {
+    case 'yes~/apply/v23/payfrequency':
+      redirectUrl = '/apply/v23/payfrequency';
+      break;
+    case 'no~/apply/v23/pay-varies-frequency':
+      redirectUrl = '/apply/v23/pay-varies-frequency';
+      break;
+    default:
+      redirectUrl = req.path;
+      break;
+  }
+  res.redirect(redirectUrl);
+});
+
+// Routes
+router.route('/apply/v23/work-supported')
+.post((req, res, next) => {
+  let redirectUrl;
+  switch (req.body['work-supported']) {
+    case 'Yes':
+      redirectUrl = '/apply/v23/expenses';
+      break;
+    case 'No':
+      redirectUrl = '/apply/v23/expenses';
+      break;
+    case 'I’m not sure':
+      redirectUrl = '/apply/v23/expenses';
+      break;
+    default:
+      redirectUrl = req.path;
+      break;
+  }
+  res.redirect(redirectUrl);
+});
+
+// Routes
+router.route('/apply/v23/expenses')
+.post((req, res, next) => {
+  let redirectUrl;
+  switch (req.body['expenses']) {
+    case 'yes~/apply/v23/expenses-details':
+      redirectUrl = '/apply/v23/expenses-details';
+      break;
+    case 'no~/apply/v23/work-another':
+      redirectUrl = '/apply/v23/work-another';
+      break;
+    default:
+      redirectUrl = req.path;
+      break;
+  }
+  res.redirect(redirectUrl);
+});
+
+// Routes
+router.route('/apply/v23/statutory-pay-end')
+.post((req, res, next) => {
+  let redirectUrl;
+  switch (req.body['statutory-pay-recent']) {
+    case 'yes~/apply/v23/statutory-pay-end':
+      redirectUrl = '/apply/v23/statutory-pay-end';
+      break;
+    case 'no~/apply/v23/statutory-pay-other':
+      redirectUrl = '/apply/v23/statutory-pay-other';
+      break;
+    default:
+      redirectUrl = req.path;
+      break;
+  }
+  res.redirect(redirectUrl);
+});
+
+// Routes
+router.route('/apply/v23/statutory-pay-other')
+.post((req, res, next) => {
+  let redirectUrl;
+  switch (req.body['statutory-pay-other']) {
+    case 'Statutory Maternity Pay':
+      redirectUrl = '/apply/v23/universal-credit';
+      break;
+    case 'Statutory Paternity Pay':
+      redirectUrl = '/apply/v23/universal-credit';
+      break;
+    case 'Statutory Adoption Pay':
+      redirectUrl = '/apply/v23/universal-credit';
+      break;
+    case 'Statutory Shared Parental Pay':
+      redirectUrl = '/apply/v23/universal-credit';
+      break;
+    case 'None':
+      redirectUrl = '/apply/v23/universal-credit';
+      break;
+    default:
+      redirectUrl = req.path;
+      break;
+  }
+  res.redirect(redirectUrl);
+});
+
+
+// Routes
+router.route('/apply/v23/pension')
+.post((req, res, next) => {
+  let redirectUrl;
+  switch (req.body['pension']) {
+    case 'Yes':
+      redirectUrl = '/apply/v23/pension-inherit';
+      break;
+    case 'No':
+      redirectUrl = '/apply/v23/insurance';
+      break;
+    case 'Not sure':
+      redirectUrl = '/apply/v23/insurance';
+      break;
+    default:
+      redirectUrl = req.path;
+      break;
+  }
+  res.redirect(redirectUrl);
+});
+
+
+
+
+
+// Routes - Pension frequency and amount
+
+
+
+
+// Routes
+router.route('/apply/v23/why-no-ssp')
+.post((req, res, next) => {
+  let redirectUrl;
+  switch (req.body['severe-disability']) {
+    case '12weeks~/apply/v23/may-be-eligible':
+      redirectUrl = '/apply/v23/may-be-eligible';
+      break;
+    case 'employmentended~/apply/v23/may-be-eligible':
+      redirectUrl = '/apply/v23/may-be-eligible';
+      break;
+    case 'sickafter~/apply/v23/may-be-eligible':
+      redirectUrl = '/apply/v23/may-be-eligible';
+      break;
+    case 'ssp28weeks~/apply/v23/may-be-eligible':
+      redirectUrl = '/apply/v23/may-be-eligible';
+      break;
+    case 'zerohour~/apply/v23/may-be-eligible':
+      redirectUrl = '/apply/v23/may-be-eligible';
+      break;
+    case 'anotherreason~/apply/v23/may-be-eligible':
+      redirectUrl = '/apply/v23/may-be-eligible';
+      break;
+    case 'notsure~/apply/v23/may-be-eligible':
+      redirectUrl = '/apply/v23/may-be-eligible';
+      break;  
+    default:
+      redirectUrl = req.path;
+      break;
+  }
+  res.redirect(redirectUrl);
+});
+
+// Routes
+router.route('/apply/v23/may-not-be-eligible')
+.post((req, res, next) => {
+  let redirectUrl;
+  switch (req.body['no-health-condition']) {
+    case 'uc~https://www.gov.uk/universal-credit':
+      redirectUrl = 'https://www.gov.uk/universal-credit';
+      break;
+    case 'nsjsa~https://www.gov.uk/jobseekers-allowance/':
+      redirectUrl = 'https://www.gov.uk/jobseekers-allowance';
+      break;
+    case 'nsesa~/apply/v23/state-pension':
+      redirectUrl = '/apply/v23/state-pension';
+      break;
+    default:
+      redirectUrl = req.path;
+      break;
+  }
+  res.redirect(redirectUrl);
+});
+
+// Routes
+router.route('/apply/v23/landline')
+.post((req, res, next) => {
+  let redirectUrl;
+  switch (req.body['other-phone']) {
+    case 'yes~/apply/v23/email':
+      redirectUrl = '/apply/v23/email';
+      break;
+    case 'no~/apply/v23/email':
+      redirectUrl = '/apply/v23/email';
+      break;
+    default:
+      redirectUrl = req.path;
+      break;
+  }
+  res.redirect(redirectUrl);
+});
+
+// Routes
+router.route('/apply/v23/may-not-be-eligible-national-insurance')
+.post((req, res, next) => {
+  let redirectUrl;
+  switch (req.body['apply-for-uc']) {
+    case 'no~/apply/v23/statutory-pay':
+      redirectUrl = '/apply/v23/statutory-pay';
+      break;
+    case 'yes~https://www.gov.uk/universal-credit':
+      redirectUrl = 'https://www.gov.uk/universal-credit';
+      break;
+    default:
+      redirectUrl = req.path;
+      break;
+  }
+  res.redirect(redirectUrl);
+});
+
+// Routes
+router.route('/apply/v23/insurance')
+.post((req, res, next) => {
+  let redirectUrl;
+  switch (req.body['insurance']) {
+    case 'Yes':
+      redirectUrl = '/apply/v23/bank';
+      break;
+    case 'No':
+      redirectUrl = '/apply/v23/bank';
+      break;
+    case 'Not sure':
+      redirectUrl = '/apply/v23/bank';
+      break;
+    default:
+      redirectUrl = req.path;
+      break;
+  }
+  res.redirect(redirectUrl);
+});
+
+// Routes
+router.route('/apply/v23/who-is-applying')
+.post((req, res, next) => {
+  req.session.destroy();
+  let redirectUrl;
+  switch (req.body['apply']) {
+    case 'apply-myself':
+      redirectUrl = '/apply/v23/eligibility-start';
+      break;
+    case 'apply-someone':
+      redirectUrl = '/apply/v23/cannot-apply-online';
+      break;
+    case 'apply-help':
+      redirectUrl = '/apply/v23/helping-someone-apply';
+      break;
+    default:
+      redirectUrl = req.path;
+      break;
+  }
+  res.redirect(redirectUrl);
+});
+
+// Routes
+router.route('/apply/v23/claim-start-date-if-statutory-sick-pay')
+.post((req, res, next) => {
+  let redirectUrl;
+  switch (req.body['claim-date-statutory-pay']) {
+    case 'yes':
+      redirectUrl = '/apply/v23/claim-end-date';
+      break;
+    case 'no':
+      redirectUrl = '/apply/v23/claimdate-new';
+      break;
+    default:
+      redirectUrl = req.path;
+      break;
+  }
+  res.redirect(redirectUrl);
+});
+
+// Routes
+router.route('/apply/v23/universal-credit')
+.post((req, res, next) => {
+  let redirectUrl;
+  var sspYear = req.session.data['ssp-year'];
+
+  switch (sspYear !== undefined) {
+    case true:
+      redirectUrl = '/apply/v23/claim-start-date-if-statutory-sick-pay';
+      break;
+    case false:
+      redirectUrl = '/apply/v23/claimdate-new';
+      break;
+    default:
+      redirectUrl = req.path;
+      break;
+  }
+  res.redirect(redirectUrl);
+});
+
+
+
+
+
+// New Routes
+
+
+// Section - Pension or annuity
+
+// Pension - Are you getting regular payments from a pension or annuity?
+
+router.post('/apply/v23/pension/pension', function (req, res) {
+  var answer = req.session.data['pension'];
+  if (answer === 'Yes') {
+    res.redirect(`/apply/v23/pension/pension-name`);
+  } 
+  else {
+    res.redirect(`/apply/v23/pension/pension-cya`);
+  }
+});
+
+////// V23 END //////
+
+///////////////////////////////////////////////////////////////////////////////
+//  V22 ROUTING                                                             //
+///////////////////////////////////////////////////////////////////////////////
+
 // Routes you to state-pension or may-not-be-eligible at the first radio button screen
 router.route('/apply/v22/disability-or-health-condition')
 .post((req, res, next) => {
@@ -554,6 +1207,8 @@ router.route('/apply/v22/telephone')
   }
   res.redirect(redirectUrl);
 });
+
+
 
 // Routes
 router.route('/apply/v22/condition-another')
@@ -1048,15 +1703,13 @@ router.post('/apply/v22/pension/pension', function (req, res) {
   }
 });
 
+////// V22 END //////
+
+
+
 
 
 // Pension - Do you have another pension or annuity you currently receive?
-
-
-
-
-
-
 router.route('/apply/v22/pension/pension-add-another')
 .post((req, res, next) => {
   let redirectUrl;
@@ -1079,91 +1732,6 @@ router.route('/apply/v22/pension/pension-add-another')
 
 
 // Pension - Is this pension or annuity inherited?
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Routes 
 // Experimental Prototype
