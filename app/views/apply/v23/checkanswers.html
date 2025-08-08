@@ -8,7 +8,7 @@
 <div class="govuk-phase-banner">
   <p class="govuk-phase-banner__content">
     <strong class="govuk-tag govuk-phase-banner__content__tag">
-      beta
+      Beta
     </strong>
     <span class="govuk-phase-banner__text">
       This is a new service – your <a class="govuk-link" href="feedback">feedback (opens in a new tab)</a> will help
@@ -16,7 +16,6 @@
     </span>
   </p>
 </div>
-{% include "includes/back-link.html" %}
 {% endblock %}
 
 {% block content %}
@@ -29,7 +28,7 @@
         <h1 class="govuk-heading-l">
           Check your answers before sending your application
         </h1>
-
+<!-- PERSONAL DETAILS -->
         <h2 class="govuk-heading-m">
           Personal details
         </h2>
@@ -44,7 +43,7 @@
             </dd>
             <dd class="govuk-summary-list__actions">
               <a href="name">
-                Change<span class="govuk-visually-hidden"> first name</span>
+                Change<span class="govuk-visually-hidden">name</span>
               </a>
             </dd>
           </div>
@@ -77,6 +76,7 @@
           </div>
           </dl>
 
+<!-- CONTACT DETAILS -->
           <h2 class="govuk-heading-m">
             Contact details
           </h2>
@@ -88,7 +88,9 @@
             </dt>
             <dd class="govuk-summary-list__value">
               {{ data['address-line-1'] | default("72 Guild Street") }} <br>
+              {% if (data['address-postcode'] == "address-line-2") %}
               {{ data['address-line-2'] }} <br>
+              {% endif %}
               {{ data['address-town'] | default("London") | default("London") }} <br>
               {{ data['address-postcode'] | default("SE23 6FH") }}
             </dd>
@@ -243,30 +245,169 @@
 
         </dl>
 
-      
+<!-- ALTERNATIVE FORMATS-->
 
+        <h2 class="govuk-heading-m govuk-!-padding-top-6">Accessible formats</h2>
+        {% if data['altFormatNeeds']=="yes-alt-formats" %}
+        {{ govukSummaryList({
+          classes: 'govuk-!-margin-bottom-9',
+          rows: [
+            {
+              key: {
+                text: "Accessible format needs"
+              },
+              value: {
+                html: "Yes"
+              },
+              actions: {
+                items: [
+                  {
+                    href: "wt-alt-formats-3/guard",
+                    text: "Change",
+                    visuallyHiddenText: "accessible format needs"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Instead of a standard phone call"
+              },
+              value: {
+                text: "Relay UK"
+              },
+              actions: {
+                items: [
+                  {
+                    href: "wt-alt-formats-3/phone-contact-preference",
+                    text: "Change",
+                    visuallyHiddenText: "phone call needs"
+                  }
+                ]
+              }
+            }
+            ,
+            {
+              key: {
+                text: "Relay UK number"
+              },
+              value: {
+                text: "18002 778899"
+              },
+              actions: {
+                items: [
+                  {
+                    href: "wt-alt-formats-3/contact-phone-af-relay",
+                    text: "Change",
+                    visuallyHiddenText: "relay uk number"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Instead of a standard letter"
+              },
+              value: {
+                text: "Coloured paper and large print"
+              },
+              actions: {
+                items: [
+                  {
+                    href: "wt-alt-formats-3/letters-contact-preference",
+                    text: "Change",
+                    visuallyHiddenText: "standard letter needs"
+                  }
+                ]
+              }
+            }
+            ,
+            {
+              key: {
+                text: "Coloured paper"
+              },
+              value: {
+                text: "Cream"
+              },
+              actions: {
+                items: [
+                  {
+                    href: "wt-alt-formats-3/coloured-paper",
+                    text: "Change",
+                    visuallyHiddenText: "paper colour"
+                  }
+                ]
+              }
+            },
+            {
+              key: {
+                text: "Font size"
+              },
+              value: {
+                text: "16"
+              },
+              actions: {
+                items: [
+                  {
+                    href: "wt-alt-formats-3/large-print",
+                    text: "Change",
+                    visuallyHiddenText: "font size"
+                  }
+                ]
+              }
+            }
+          ]
+        }) }}
+  
+        {% elif data['altFormatNeeds']== "no-alt-formats" %}
+        {{ govukSummaryList({
+          classes: 'govuk-!-margin-bottom-9',
+          rows: [
+            {
+              key: {
+                text: "Accessible format needs"
+              },
+              value: {
+                html: "No"
+              },
+              actions: {
+                items: [
+                  {
+                    href: "wt-alt-formats-3/guard",
+                    text: "Change",
+                    visuallyHiddenText: "accessible format needs"
+                  }
+                ]
+              }
+            }
+          ]
+        }) }}
+        {% else %}
+        {{ govukSummaryList({
+          classes: 'govuk-!-margin-bottom-9',
+          rows: [
+            {
+              key: {
+                text: "Accessible format needs"
+              },
+              value: {
+                html: "No"
+              },
+              actions: {
+                items: [
+                  {
+                    href: "wt-alt-formats-3/guard",
+                    text: "Change",
+                    visuallyHiddenText: "accessible format needs"
+                  }
+                ]
+              }
+            }
+          ]
+        }) }}
+        {% endif %}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!-- HEALTH-->
         <h2 class="govuk-heading-m">
           Health details
         </h2>
@@ -457,7 +598,7 @@
             </dd>
           </div>
         </dl>
-
+<!-- VOLUNTARY WORK -->
         <h2 class="govuk-heading-m">
           Voluntary work
         </h2>
@@ -563,7 +704,7 @@
           </div>
           </dl>
         {% endif %}
-
+<!-- PAID WORK -->
         <h2 class="govuk-heading-m">
           Paid work
         </h2>
@@ -730,7 +871,7 @@
           {% endif %}
           {% endif %}
         </dl>
-
+<!-- OTHER PAID WORK -->
         <h4 class="govuk-heading-m">Other paid work</h4>
         <dl class="govuk-summary-list govuk-!-margin-bottom-9">
           <div class="govuk-summary-list__row">
@@ -749,7 +890,7 @@
         </dl> 
 
         {% endif %}
-
+<!-- STATUTORY PAY -->
         <h2 class="govuk-heading-m">
           Statutory pay
         </h2>
@@ -840,7 +981,7 @@
             </dd>
           </div>
         </dl>
-
+<!-- CLAIM DATE -->
         <h2 class="govuk-heading-m">Claim date</h2>
 
         <dl class="govuk-summary-list govuk-!-margin-bottom-9">
@@ -905,6 +1046,7 @@
           </div>
           {% endif %}
         </dl>
+<!-- WORKING AND LIVING ABROAD -->
         <h2 class="govuk-heading-m">Working and living abroad</h2>
         <dl class="govuk-summary-list govuk-!-margin-bottom-9">
           <div class="govuk-summary-list__row">
@@ -916,24 +1058,25 @@
             </dd>
             <dd class="govuk-summary-list__actions">
               <a href="work-overseas">
-                Change<span class="govuk-visually-hidden"> contact details</span>
+                Change<span class="govuk-visually-hidden"> worked abroad</span>
               </a>
             </dd>
           </div>
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
-              Lived abroad with family member in the armed forces in the last 12 weeks
+              Lived abroad with spouse or civil partner in the armed forces
             </dt>
             <dd class="govuk-summary-list__value">
               {{data['military-overseas'] | default("No")}}
             </dd>
             <dd class="govuk-summary-list__actions">
               <a href="military-overseas">
-                Change<span class="govuk-visually-hidden"> contact details</span>
+                Change<span class="govuk-visually-hidden"> lived abroad with the armed forces</span>
               </a>
             </dd>
           </div>
         </dl>
+<!-- PENSIONS -->
         <h2 class="govuk-heading-m">
           Pensions
         </h2>
@@ -1004,7 +1147,7 @@
             {% endif %}
         </dl>
 
-
+<!-- PERMANENT HEALTH INSURANCE -->
 
         <h2 class="govuk-heading-m">
           Permanent health insurance
@@ -1041,6 +1184,8 @@
           {% endif %}
         </dl>
 
+<!-- SHARING THE DECISION WITH YOUR DOCTOR -->
+
         <h2 class="govuk-heading-m">
           Sharing the decision with your doctor
         </h2>
@@ -1060,7 +1205,28 @@
           </div>
         </dl>
 
-        <input type="submit" class="govuk-button" value="Continue" id="submit">
+<!-- APPOINTMENTS IN PERSON -->
+
+        <h2 class="govuk-heading-m">
+          Appointments in person
+        </h2>
+        <dl class="govuk-summary-list govuk-!-margin-bottom-9">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Adjustments for appointments in person
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{data['appointment-adjustments'] | capitalize | default("No")}}
+            </dd>
+            <dd class="govuk-summary-list__actions">
+              <a href="adjustments-appointments">
+                Change<span class="govuk-visually-hidden"> adjustment needs for appointments</span>
+              </a>
+            </dd>
+          </div>
+        </dl>
+
+<input type="submit" class="govuk-button" value="Continue" id="submit">
 
   </div>
 </div>
