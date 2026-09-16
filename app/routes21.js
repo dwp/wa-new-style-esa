@@ -28,7 +28,7 @@ var path = require('path')
 // Data sources
 router.all('/data/:data/source/:source', (req, res) => {
   const { data, source } = req.params
-  res.json(require(`./data/${data}/source/${source}`))
+  res.send("Please check console logs.");
 })
 
 
@@ -391,7 +391,7 @@ router.route('/apply/v21/disability-or-health-condition')
       redirectUrl = req.path;
       break;
   }
-  res.redirect(redirectUrl);
+  res.redirect(url);
 });
 
 // Routes
@@ -409,7 +409,7 @@ router.route('/apply/v21/state-pension')
       redirectUrl = req.path;
       break;
   }
-  res.redirect(redirectUrl);
+  res.redirect(url);
 });
 
 // Routes
@@ -430,7 +430,7 @@ router.route('/apply/v21/national-insurance')
       redirectUrl = req.path;
       break;
   }
-  res.redirect(redirectUrl);
+  res.redirect(url);
 });
 
 // Routes
@@ -448,7 +448,7 @@ router.route('/apply/v21/statutory-pay')
       redirectUrl = req.path;
       break;
   }
-  res.redirect(redirectUrl);
+  res.redirect(url);
 });
 
 // Routes
@@ -466,7 +466,7 @@ router.route('/apply/v21/statutory-pay-date')
       redirectUrl = req.path;
       break;
   }
-  res.redirect(redirectUrl);
+  res.redirect(url);
 });
 
 // Routes
@@ -484,7 +484,7 @@ router.route('/apply/v21/address')
       redirectUrl = req.path;
       break;
   }
-  res.redirect(redirectUrl);
+  res.redirect(url);
 });
 
 // Routes
@@ -502,7 +502,7 @@ router.route('/apply/v21/telephone')
       redirectUrl = req.path;
       break;
   }
-  res.redirect(redirectUrl);
+  res.redirect(url);
 });
 
 // Routes
@@ -520,7 +520,7 @@ router.route('/apply/v21/condition-another')
       redirectUrl = req.path;
       break;
   }
-  res.redirect(redirectUrl);
+  res.redirect(url);
 });
 
 // Routes
@@ -538,7 +538,7 @@ router.route('/apply/v21/live-less-than-12-months')
       redirectUrl = req.path;
       break;
   }
-  res.redirect(redirectUrl);
+  res.redirect(url);
 });
 
 // Routes
@@ -556,7 +556,7 @@ router.route('/apply/v21/hospital')
       redirectUrl = req.path;
       break;
   }
-  res.redirect(redirectUrl);
+  res.redirect(url);
 });
 
 // Routes
@@ -574,7 +574,7 @@ router.route('/apply/v21/pregnant')
       redirectUrl = req.path;
       break;
   }
-  res.redirect(redirectUrl);
+  res.redirect(url);
 });
 
 // Routes
@@ -592,7 +592,7 @@ router.route('/apply/v21/voluntary-work')
       redirectUrl = req.path;
       break;
   }
-  res.redirect(redirectUrl);
+  res.redirect(url);
 });
 
 // Routes
@@ -610,7 +610,7 @@ router.route('/apply/v21/voluntary-work-another')
       redirectUrl = req.path;
       break;
   }
-  res.redirect(redirectUrl);
+  res.redirect(url);
 });
 
 // Routes
@@ -631,7 +631,7 @@ router.route('/apply/v21/work')
       redirectUrl = req.path;
       break;
   }
-  res.redirect(redirectUrl);
+  res.redirect(url);
 });
 
 // Routes
@@ -649,7 +649,7 @@ router.route('/apply/v21/worksick')
       redirectUrl = req.path;
       break;
   }
-  res.redirect(redirectUrl);
+  res.redirect(url);
 });
 
 // Routes
@@ -670,7 +670,7 @@ router.route('/apply/v21/work-another')
       redirectUrl = req.path;
       break;
   }
-  res.redirect(redirectUrl);
+  res.redirect(url);
 });
 
 // Routes
@@ -688,7 +688,7 @@ router.route('/apply/v21/work-hours')
       redirectUrl = req.path;
       break;
   }
-  res.redirect(redirectUrl);
+  res.redirect(url);
 });
 
 // Routes
@@ -709,7 +709,7 @@ router.route('/apply/v21/work-supported')
       redirectUrl = req.path;
       break;
   }
-  res.redirect(redirectUrl);
+  res.redirect(url);
 });
 
 // Routes
@@ -727,7 +727,7 @@ router.route('/apply/v21/expenses')
       redirectUrl = req.path;
       break;
   }
-  res.redirect(redirectUrl);
+  res.redirect(url);
 });
 
 // Routes
@@ -745,7 +745,7 @@ router.route('/apply/v21/statutory-pay-end')
       redirectUrl = req.path;
       break;
   }
-  res.redirect(redirectUrl);
+  res.redirect(url);
 });
 
 // Routes
@@ -772,7 +772,7 @@ router.route('/apply/v21/statutory-pay-other')
       redirectUrl = req.path;
       break;
   }
-  res.redirect(redirectUrl);
+  res.redirect(url);
 });
 
 // Routes
@@ -793,7 +793,7 @@ router.route('/apply/v21/pension')
       redirectUrl = req.path;
       break;
   }
-  res.redirect(redirectUrl);
+  res.redirect(url);
 });
 
 // Routes
@@ -826,7 +826,7 @@ router.route('/apply/v21/why-no-ssp')
       redirectUrl = req.path;
       break;
   }
-  res.redirect(redirectUrl);
+  res.redirect(url);
 });
 
 // Routes
@@ -847,7 +847,7 @@ router.route('/apply/v21/may-not-be-eligible')
       redirectUrl = req.path;
       break;
   }
-  res.redirect(redirectUrl);
+  res.redirect(url);
 });
 
 // Routes
@@ -865,7 +865,7 @@ router.route('/apply/v21/landline')
       redirectUrl = req.path;
       break;
   }
-  res.redirect(redirectUrl);
+  res.redirect(url);
 });
 
 // Routes
@@ -883,7 +883,7 @@ router.route('/apply/v21/may-not-be-eligible-national-insurance')
       redirectUrl = req.path;
       break;
   }
-  res.redirect(redirectUrl);
+  res.redirect(url);
 });
 
 // Routes
@@ -904,7 +904,7 @@ router.route('/apply/v21/insurance')
       redirectUrl = req.path;
       break;
   }
-  res.redirect(redirectUrl);
+  res.redirect(url);
 });
 
 // Routes
@@ -926,7 +926,7 @@ router.route('/apply/v21/who-is-applying')
       redirectUrl = req.path;
       break;
   }
-  res.redirect(redirectUrl);
+  res.redirect(url);
 });
 
 // Routes
@@ -944,7 +944,7 @@ router.route('/apply/v21/claim-start-date-if-statutory-sick-pay')
       redirectUrl = req.path;
       break;
   }
-  res.redirect(redirectUrl);
+  res.redirect(url);
 });
 
 // Routes
@@ -964,7 +964,7 @@ router.route('/apply/v21/universal-credit')
       redirectUrl = req.path;
       break;
   }
-  res.redirect(redirectUrl);
+  res.redirect(url);
 });
 
 
