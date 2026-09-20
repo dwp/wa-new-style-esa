@@ -1,7 +1,7 @@
 include:
   #.pre
   - project: 'dwp/engineering/pipeline-solutions/gitlab/fragments/fragment-version-check'
-    ref: 2.4.0
+    ref: 2.4.7
     file: 'ci-include-fragment-version-check.yml'
   #code-quality
   - project: 'dwp/engineering/pipeline-solutions/gitlab/fragments/gitleaks'
