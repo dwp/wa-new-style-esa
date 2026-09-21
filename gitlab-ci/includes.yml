@@ -11,7 +11,7 @@ include:
     ref: 3.1.5
     file: 'ci-include-shell-check.yml'
   - project: 'dwp/engineering/pipeline-solutions/gitlab/fragments/todo-checker'
-    ref: 2-1-4
+    ref: 2.1.5
     file: 'ci-include-todo-checker.yml'
   - project: 'dwp/engineering/pipeline-solutions/gitlab/fragments/heroku-site-publish'
     ref: 1-0-0
