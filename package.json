@@ -18,7 +18,7 @@
     "@x-govuk/govuk-prototype-filters": "2.2.0",
     "express": "4.22.3",
     "govuk-frontend": "6.5.1",
-    "govuk-prototype-kit": "13.20.2",
+    "govuk-prototype-kit": "13.20.5",
     "hmrc-frontend": "7.35.0",
     "jquery": "4.0.0",
     "nhsapp-frontend": "5.3.0",
