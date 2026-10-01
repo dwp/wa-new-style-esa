@@ -14,7 +14,7 @@
     "@govuk-prototype-kit/common-templates": "3.0.1",
     "@govuk-prototype-kit/task-list": "2.0.0",
     "@ministryofjustice/frontend": "9.0.0",
-    "@scottish-government/design-system": "4.1.1",
+    "@scottish-government/design-system": "4.2.0",
     "@x-govuk/govuk-prototype-filters": "2.2.0",
     "express": "4.22.3",
     "govuk-frontend": "6.5.1",
