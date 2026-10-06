@@ -14,5 +14,5 @@ include:
     ref: 2.1.5
     file: 'ci-include-todo-checker.yml'
   - project: 'dwp/engineering/pipeline-solutions/gitlab/fragments/heroku-site-publish'
-    ref: 1-0-0
+    ref: 1.2.2
     file: 'ci-include-heroku-site-publish-base.yml'
